@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const vueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const devMode = process.argv.indexOf('--mode=production') === -1;
-console.log(__dirname);
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 
 module.exports = {
     entry: {
@@ -130,13 +130,6 @@ module.exports = {
             }
         ]
     },
-    resolve: {
-        alias: {
-            'vue$': 'vue/dist/vue.runtime.esm.js',
-            ' @': path.resolve(__dirname, '../src')
-        },
-        extensions: ['*', '.js', '.json', '.vue']
-    },
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
@@ -147,5 +140,31 @@ module.exports = {
             filename: devMode ? '[name].css' : '[name].[hash].css',
             chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
         })
-    ]
+    ],
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.runtime.esm.js',
+            ' @': path.resolve(__dirname, '../src')
+        },
+        extensions: ['*', '.js', '.json', '.vue']
+    },
+    optimization: {
+        minimizer: [
+            new ParallelUglifyPlugin({
+                cacheDir: '.catch/',
+                uglifyJS: {
+                    output: {
+                        comments: false,
+                        beautify: false
+                    },
+                    compress: {
+                        drop_console: true,
+                        collapse_vars: true,
+                        reduce_vars: true
+                    }
+                }
+            })
+        ]
+    }
+
 }
