@@ -21,6 +21,16 @@ module.exports = {
         noParse: /jquery/,
         rules: [
             {
+                test: /\.(js)$/,
+                use: [
+                    'cache-loader',
+                    'babel-loader',
+                    'vue-loader',
+                    'vue-style-loader'
+                ],
+                include: path.resolve(__dirname, '../src')
+            },
+            {
                 test: /\.js$/,
                 use: {
                     loader: 'babel-loader',
