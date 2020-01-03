@@ -37,7 +37,9 @@ module.exports = {
             },
             {
                 test: /\.vue$/,
-                use: [{
+                use: [
+                    'cache-loader',
+                    {
                     loader: 'vue-loader',
 
                     options: {
@@ -51,7 +53,9 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [{
+                use: [
+                    'cache-loader',
+                    {
                     loader: devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
                     options: {
                         publicPath: "../dist/css/",
@@ -68,7 +72,9 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                use: [{
+                use: [
+                    'cache-loader',
+                    {
                     loader: devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
                     options: {
                         publicPath: "../dist/css/",
