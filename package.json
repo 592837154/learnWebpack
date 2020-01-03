@@ -6,9 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config build/webpack.prod.js --mode=production",
-    "dev": "webpack-dev-server --config build/webpack.dev.js --open"
+    "dev": "webpack-dev-server --config build/webpack.dev.js --open",
+    "dll": "webpack --config build/webpack.dll.config.js"
   },
-  "author": "",
+  "author": "zhukai",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.7.7",
@@ -38,6 +39,7 @@
     "webpack-parallel-uglify-plugin": "^1.1.2"
   },
   "dependencies": {
+    "element-ui": "^2.13.0",
     "vue": "^2.6.11"
   }
 }

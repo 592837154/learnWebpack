@@ -5,6 +5,8 @@ const vueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const devMode = process.argv.indexOf('--mode=production') === -1;
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const webpack = require('webpack');
 
 module.exports = {
     entry: {
@@ -139,7 +141,14 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: devMode ? '[name].css' : '[name].[hash].css',
             chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
-        })
+        }),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require('./vendor-manifest.json')
+        }),
+        new CopyWebpackPlugin([{
+            from: 'static', to: 'static'
+        }])
     ],
     resolve: {
         alias: {
