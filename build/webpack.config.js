@@ -153,10 +153,10 @@ module.exports = {
         new CopyWebpackPlugin([{
             from: 'static', to: 'static'
         }]),
-        new BundleAnalyzerPlugin({
-            analyzerHost: '127.0.0.1',
-            analyzerPort: 2021
-        })
+        // new BundleAnalyzerPlugin({
+        //     analyzerHost: '127.0.0.1',
+        //     analyzerPort: 2021
+        // })
     ],
     resolve: {
         alias: {
