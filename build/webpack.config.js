@@ -22,23 +22,16 @@ module.exports = {
         noParse: /jquery/,
         rules: [
             {
-                test: /\.(js)$/,
+                test: /\.js$/,
                 use: [
                     'cache-loader',
-                    'babel-loader',
-                    'vue-loader',
-                    'vue-style-loader'
-                ],
-                include: path.resolve(__dirname, '../src')
-            },
-            {
-                test: /\.js$/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env']
+                        }
                     }
-                },
+                ],
                 include: [path.resolve(__dirname, '../src')],
                 exclude: /node_modules/,
             },
