@@ -7,6 +7,7 @@ const devMode = process.argv.indexOf('--mode=production') === -1;
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: {
@@ -158,7 +159,11 @@ module.exports = {
         }),
         new CopyWebpackPlugin([{
             from: 'static', to: 'static'
-        }])
+        }]),
+        new BundleAnalyzerPlugin({
+            analyzerHost: '127.0.0.1',
+            analyzerPort: 2021
+        })
     ],
     resolve: {
         alias: {
